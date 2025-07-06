@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Test Sound</title>
+</head>
+<body>
+  <button id="playBtn">Play Test Sound</button>
+  <audio id="testAudio" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7981d15c07.mp3?filename=short-trumpet-fanfare-6714.mp3" preload="auto"></audio>
+
+  <script>
+    const btn = document.getElementById('playBtn');
+    const audio = document.getElementById('testAudio');
+
+    btn.addEventListener('click', () => {
+      audio.currentTime = 0;
+      audio.play().then(() => {
+        console.log('Audio playing');
+      }).catch(e => {
+        console.error('Audio play error:', e);
+      });
+    });
+  </script>
+</body>
+</html>
