@@ -22,7 +22,6 @@
       position: relative;
     }
 
-    /* Fancy Title at Top */
     .main-title {
       font-family: 'Libre Barcode Hebrew Text', cursive;
       font-size: 3.5rem;
@@ -111,11 +110,10 @@
     }
 
     .menorah {
-      width: 30px;
-      height: 40px;
+      font-size: 32px;
       opacity: 0;
-      filter: drop-shadow(0 0 2px #0047ab);
       animation: menorah-flash 1.5s infinite;
+      text-shadow: 1px 1px 2px #0047ab;
     }
 
     .menorah:nth-child(1) { animation-delay: 0s; }
@@ -138,15 +136,14 @@
       z-index: 5;
     }
 
-    .rain img {
+    .rain div {
       position: absolute;
-      width: 18px;
-      height: 24px;
+      font-size: 20px;
       animation-name: fall;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
-      filter: drop-shadow(0 0 2px #003c8f);
       user-select: none;
+      text-shadow: 0 0 2px #003c8f;
     }
 
     @keyframes fall {
@@ -175,9 +172,9 @@
   <div class="ball" id="ball">
     <div class="answer" id="answer">Tap the ball</div>
     <div class="menorahs" id="menorahs" style="display:none;">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Menorah_Icon_Blue.svg" class="menorah" />
-      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Menorah_Icon_Blue.svg" class="menorah" />
-      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Menorah_Icon_Blue.svg" class="menorah" />
+      <div class="menorah">🕎</div>
+      <div class="menorah">🕎</div>
+      <div class="menorah">🕎</div>
     </div>
   </div>
 
@@ -186,18 +183,113 @@
   <audio id="sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7981d15c07.mp3?filename=short-trumpet-fanfare-6714.mp3" preload="auto"></audio>
 
   <script>
-    const responses = [
-      "That's antisemitism.",
-      "Israel has the right to defend itself.",
-      "You’re ignoring Hamas terrorism.",
-      "What about China or Iran?",
-      "That’s a blood libel.",
-      "You're being one-sided.",
-      "Israel is the only democracy in the Middle East.",
-      "You're singling out Jews.",
-      "That’s a double standard.",
-      "This is about security, not apartheid.",
-      // Add up to 100+ responses if needed
+  const responses = [
+    "That's antisemitism.",
+    "Israel has the right to defend itself.",
+    "You’re ignoring Hamas terrorism.",
+    "What about China or Iran?",
+    "That’s a blood libel.",
+    "You're being one-sided.",
+    "Israel is the only democracy in the Middle East.",
+    "You're singling out Jews.",
+    "That’s a double standard.",
+    "This is about security, not apartheid.",
+    "Where’s your outrage about Syria?",
+    "That’s misinformation.",
+    "This conflict is complex.",
+    "You're oversimplifying a centuries-old issue.",
+    "Jews have a historic connection to this land.",
+    "Palestinians reject peace.",
+    "Criticism is fine, but this is demonization.",
+    "That’s the IHRA definition of antisemitism.",
+    "Israel protects LGBTQ+ rights.",
+    "You’re ignoring Palestinian incitement.",
+    "Why don’t you focus on Yemen?",
+    "That’s propaganda.",
+    "This claim lacks context.",
+    "Check your sources.",
+    "You're falling for Hamas narratives.",
+    "That's a biased report.",
+    "Israel withdrew from Gaza in 2005.",
+    "No other country faces these threats.",
+    "Do you hold other democracies to this standard?",
+    "This isn’t apartheid; it's self-defense.",
+    "You're ignoring Jewish refugees from Arab lands.",
+    "Criticism is fair—this is hate.",
+    "Israel made peace with Egypt and Jordan.",
+    "Peace requires two willing parties.",
+    "That’s not what international law says.",
+    "The UN is biased against Israel.",
+    "Palestinian leadership oppresses its own people.",
+    "You’ve been misled by social media.",
+    "There’s no moral equivalence here.",
+    "Hamas uses civilians as shields.",
+    "Why don’t you criticize Hezbollah?",
+    "Where’s your concern for Jewish safety?",
+    "The IDF warns civilians before strikes.",
+    "No army is perfect, but Israel tries.",
+    "This isn’t genocide.",
+    "Israel wants peace. Do they?",
+    "Jews are indigenous to Israel.",
+    "That’s selective outrage.",
+    "Israel has Arab judges and MKs.",
+    "There’s freedom of religion in Israel.",
+    "You're applying double standards.",
+    "That’s not activism. That’s hate.",
+    "You're erasing Jewish history.",
+    "Your map is misleading.",
+    "That’s a common antisemitic trope.",
+    "Zionism ≠ racism.",
+    "That claim has been debunked.",
+    "This is classic scapegoating.",
+    "It’s complicated—you’re reducing it to a meme.",
+    "Do you support Palestinian democracy?",
+    "Jews deserve safety too.",
+    "This narrative is one-sided.",
+    "Why silence Israeli voices?",
+    "That’s not what human rights mean.",
+    "This rhetoric emboldens extremists.",
+    "You're ignoring Israel's peace offers.",
+    "Why ignore Hamas war crimes?",
+    "This isn’t criticism, it’s delegitimization.",
+    "You're making assumptions.",
+    "Let’s be accurate, not inflammatory.",
+    "Where’s your empathy for Israelis?",
+    "This is an old libel in new form.",
+    "You don’t understand the history.",
+    "The truth is more nuanced.",
+    "Civilians on both sides suffer.",
+    "Hamas runs Gaza, not Israel.",
+    "Israel has a right to borders.",
+    "Jews can’t be colonizers in their own land.",
+    "That’s not how ethnic cleansing works.",
+    "Palestinians have autonomy in many areas.",
+    "Israel isn’t perfect, but this is slander.",
+    "This argument lacks good faith.",
+    "Would you accept rockets into your city?",
+    "That image was faked.",
+    "Social media is fueling misinformation.",
+    "Don't erase Jewish trauma.",
+    "There’s a difference between critique and hatred.",
+    "Antizionism often masks antisemitism.",
+    "You’re using dehumanizing language.",
+    "What’s your goal here?",
+    "This conversation needs more facts.",
+    "Be critical, but be fair.",
+    "Jews also suffer from this conflict.",
+    "Stop weaponizing social justice.",
+    "That’s not a resistance—it’s terrorism.",
+    "Support for Israel ≠ opposition to peace.",
+    "There are 22 Arab countries. One Jewish state.",
+    "Look at what the region was before 1948.",
+    "You’re only seeing one part of the story.",
+    "Israel isn’t your punching bag.",
+    "You wouldn’t say this to another minority.",
+    "Being pro-Israel doesn’t mean anti-Palestinian.",
+    "You’re ignoring Israeli victims.",
+    "This is veiled bigotry.",
+    "That’s not how occupation is defined."
+
     ];
 
     const ball = document.getElementById("ball");
@@ -206,14 +298,12 @@
     const menorahsEl = document.getElementById('menorahs');
     const rainContainer = document.getElementById('rain');
 
-    const menorahImgSrc = 'https://upload.wikimedia.org/wikipedia/commons/8/8b/Menorah_Icon_Blue.svg';
     const rainCount = 60;
 
     function createRain() {
       for (let i = 0; i < rainCount; i++) {
-        const menorah = document.createElement('img');
-        menorah.src = menorahImgSrc;
-        menorah.classList.add('rain');
+        const menorah = document.createElement('div');
+        menorah.textContent = '🕎';
         menorah.style.left = Math.random() * window.innerWidth + 'px';
         menorah.style.top = (Math.random() * -window.innerHeight) + 'px';
         menorah.style.animationDuration = (4 + Math.random() * 3) + 's';
