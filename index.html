@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Test Sound</title>
+  <title>Magical Hasbara 8-Ball</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -11,51 +11,93 @@
       padding: 0;
       font-family: sans-serif;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: linear-gradient(white, #0047ab); /* Israeli flag vibe */
+      min-height: 100vh;
+      background: linear-gradient(white, #0047ab);
     }
 
-    #playBtn {
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
-      border: none;
-      border-radius: 10px;
-      background-color: #0047ab;
-      color: white;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    .ball {
+      width: 80vw;
+      max-width: 300px;
+      height: 80vw;
+      max-height: 300px;
+      background-color: black;
+      border-radius: 50%;
+      position: relative;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
       cursor: pointer;
-      transition: background-color 0.3s ease;
     }
 
-    #playBtn:hover {
-      background-color: #00327a;
+    .answer {
+      position: absolute;
+      color: black;
+      background-color: white;
+      border-radius: 10px;
+      padding: 8px 12px;
+      text-align: center;
+      max-width: 70%;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+
+    .label {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #0047ab;
     }
 
     @media (max-width: 500px) {
-      #playBtn {
+      .answer {
+        font-size: 0.8rem;
+      }
+
+      .label {
         font-size: 1rem;
-        padding: 0.75rem 1.5rem;
       }
     }
   </style>
 </head>
 <body>
-  <button id="playBtn">Play Test Sound</button>
-  <audio id="testAudio" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7981d15c07.mp3?filename=short-trumpet-fanfare-6714.mp3" preload="auto"></audio>
+
+  <div class="ball" id="ball">
+    <div class="answer" id="answer">Tap the ball</div>
+  </div>
+  <div class="label">Criticize Israel</div>
+  
+  <audio id="sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7981d15c07.mp3?filename=short-trumpet-fanfare-6714.mp3" preload="auto"></audio>
 
   <script>
-    const btn = document.getElementById('playBtn');
-    const audio = document.getElementById('testAudio');
+    const responses = [
+      "That's antisemitism.",
+      "Israel has the right to defend itself.",
+      "You’re ignoring Hamas terrorism.",
+      "What about China or Iran?",
+      "That’s a blood libel.",
+      "You're being one-sided.",
+      "Israel is the only democracy in the Middle East.",
+      "You're singling out Jews.",
+      "That’s a double standard.",
+      "This is about security, not apartheid."
+    ];
 
-    btn.addEventListener('click', () => {
-      audio.currentTime = 0;
-      audio.play().then(() => {
-        console.log('Audio playing');
-      }).catch(e => {
-        console.error('Audio play error:', e);
-      });
+    const ball = document.getElementById("ball");
+    const answer = document.getElementById("answer");
+    const sound = document.getElementById("sound");
+
+    ball.addEventListener("click", () => {
+      // Play sound
+      sound.currentTime = 0;
+      sound.play().catch(e => console.error("Sound error:", e));
+
+      // Random response
+      const randomIndex = Math.floor(Math.random() * responses.length);
+      answer.textContent = responses[randomIndex];
     });
   </script>
 </body>
